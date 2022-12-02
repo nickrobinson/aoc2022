@@ -5,7 +5,7 @@ import java.io.InputStream
 import java.util.*
 
 fun main(args: Array<String>) {
-    val inputStream: InputStream = File("/Users/nickrobinson/Development/java/aoc2022/src/day1.main/kotlin/day1/input.txt").inputStream()
+    val inputStream: InputStream = File("src/main/kotlin/day1/input.txt").inputStream()
     val lineList = mutableListOf<String>()
 
     inputStream.bufferedReader().forEachLine { lineList.add(it) }

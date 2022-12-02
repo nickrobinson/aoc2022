@@ -14,6 +14,7 @@ class RpsGame(_opponentMove: String, _myMove: String) {
         opponentMove = choiceMap[_opponentMove].toString()
     }
 
+    // Calculate game score given opponent and my move
     fun getGameScoreWithMove(): Int {
         var score: Int = choiceValueMap[myMove]!!
         val myMoveChoice = choiceMap[myMove]
@@ -76,7 +77,7 @@ class RpsGame(_opponentMove: String, _myMove: String) {
 
 fun main(args: Array<String>) {
     val inputStream: InputStream =
-        File("/Users/nickrobinson/Development/java/aoc2022/src/main/kotlin/day2/input.txt").inputStream()
+        File("src/main/kotlin/day2/input.txt").inputStream()
     val lineList = mutableListOf<String>()
 
     inputStream.bufferedReader().forEachLine { lineList.add(it) }
