@@ -18,20 +18,26 @@ fun getPriority(item: Char): Int {
     }
 }
 
-fun findSharedItem(compartmentOne: String, compartmentTwo: String): Char {
-    val sortedCompartmentOne = compartmentOne.toSortedSet().toCharArray()
-    val sortedCompartmentTwo = compartmentTwo.toSortedSet().toCharArray()
+fun findSharedItem(groups: List<String>): Char {
+    val sortedGroups = groups.map{it.toSortedSet()}
+    val combinedArr = mutableListOf<Char>()
+    for (i in sortedGroups) {
+        combinedArr += i.toTypedArray()
+    }
+    // Sort result
+    combinedArr.sort()
+    var curChar = ' '
+    var curCharCount = 1
+    for (c in combinedArr) {
+       if (c == curChar) {
+           curCharCount++
+       } else {
+           curChar = c
+           curCharCount = 1
+       }
 
-    var i = 0
-    var j = 0
-
-    while (i < sortedCompartmentOne.size && j < sortedCompartmentTwo.size) {
-        if (sortedCompartmentOne[i] == sortedCompartmentTwo[j]) {
-            return sortedCompartmentOne[i]
-        } else if (sortedCompartmentOne[i] < sortedCompartmentTwo[j]) {
-            i++
-        } else {
-            j++
+        if (curCharCount == groups.size) {
+            return curChar
         }
     }
 
@@ -50,7 +56,14 @@ fun main(args: Array<String>) {
 
     val prioritySum = lineList.sumOf {
         val splitRucksackParts = splitRucksack(it)
-        getPriority(findSharedItem(splitRucksackParts[0], splitRucksackParts[1]))
+        getPriority(findSharedItem(listOf(splitRucksackParts[0], splitRucksackParts[1])))
     }
-    println("PRIORITY SUM: $prioritySum")
+    println("PRIORITY SUM PART 1: $prioritySum")
+
+    var prioritySumPartTwo = 0
+    for (i in 0..lineList.size - 2 step 3) {
+        val sharedItem = findSharedItem(lineList.subList(i, i+3))
+        prioritySumPartTwo += getPriority(sharedItem)
+    }
+    println("PRIORITY SUM PART 2: $prioritySumPartTwo")
 }

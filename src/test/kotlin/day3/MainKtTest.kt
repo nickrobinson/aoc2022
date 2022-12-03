@@ -15,15 +15,19 @@ internal class MainKtTest {
     }
 
     @Test
-    fun findSharedItem() {
-        val testString = "vJrwpWtwJgWrhcsFMMfFFhFp"
-        val splitRucksack = day3.splitRucksack(testString)
-        assertEquals('p', day3.findSharedItem(splitRucksack[0], splitRucksack[1]))
-    }
-
-    @Test
     fun getPriority() {
         assertEquals(1, day3.getPriority('a'))
         assertEquals(27, day3.getPriority('A'))
+    }
+
+    @Test
+    fun findSharedItemList() {
+        var testGroups = listOf("vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg")
+        var sharedItem = findSharedItem(testGroups)
+        assertEquals('r', sharedItem)
+
+        testGroups = listOf("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn", "ttgJtRGJQctTZtZT", "CrZsJsPPZsGzwwsLwLmpwMDw")
+        sharedItem = findSharedItem(testGroups)
+        assertEquals('Z', sharedItem)
     }
 }
