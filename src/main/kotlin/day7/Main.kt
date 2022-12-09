@@ -4,9 +4,8 @@ package day7
 
 import java.io.File
 import java.io.InputStream
-import java.util.*
 
-class Day07() {
+class Day07(lineList: MutableList<String>) {
     fun solvePartOne(commands: List<String>): Int {
         val sizeMap = buildDirSizeMap(commands)
         return sizeMap.values.sumOf { if (it <= 100000) it else 0 }
@@ -53,7 +52,7 @@ fun main(args: Array<String>) {
 
     inputStream.bufferedReader().forEachLine { lineList.add(it) }
 
-    val day7 = Day07()
+    val day7 = Day07(lineList)
     val partOneSolution = day7.solvePartOne(lineList)
     println("PART 1: $partOneSolution")
 
